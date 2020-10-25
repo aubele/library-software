@@ -1,0 +1,1 @@
+C:\Qt\Tools\QtInstallerFramework\3.0\bin\binarycreator.exe -f -c config\config.xml -p packages LibOrg.exe

@@ -1,0 +1,45 @@
+In diesem Kapitel wird die API zur Datenbank erläutert.\bigskip \\
+\textbf{AbstractDatabase}\\
+AbstractDatabase ist die Basisklasse für jede Datenbank-Klasse, die auf die entwickelte Datenbank zugreift. Sie kapselt die Funktionalität des Verbindungsaufbaus zur Datenbank.\bigskip \\
+\textbf{Header:} abstractdatabase.h\bigskip \\
+\textbf{Library:} db.dll\bigskip \\
+\textbf{Öffentliche Methoden}\\
+\small{AbstractDatabase (QString drivername, QString dbname, QString username=QString(), QString password=QString())}\\
+Legt den zu drivername gehörenden Datenbanktyp als Standarddatenbank fest.\\
+drivername: QSQLITE\\
+dbname: Name der Datenbank\\
+username und password: Benutzername und Passwort bei verschlüsselten Datenbanken\bigskip \\
+\small{\~{}AbstractDatabase()}\\
+Zerstört das AbstractDatabase-Objekt.\bigskip \\
+
+\textbf{UserTable}\\
+UserTable repräsentiert die Tabelle der Benutzer einer Anwendung. Darin ist ein USERNAME-, ein PASSWD- und ein ROLE-Feld enthalten. Mit den Methoden der UserTable kann auf diese Felder der Datenbank zugegriffen werden. \bigskip \\
+\textbf{Header:} usertable.h\bigskip \\
+\textbf{Library:} db.dll\bigskip \\
+\textbf{enum}\\
+UserPermissions: Nothing, Lending, Adding, Administrative\bigskip \\
+\textbf{Struktur}\\
+UserRow: UserName - QString, Passwd - QString und Permissions - UserPermissions\bigskip \\
+\textbf{Öffentliche Methoden}\\
+\small{bool insert(UserRow User) noexcept}\\
+Fügt einen neuen Benutzer zur Datenbank hinzu.\bigskip \\
+\small{bool insert(QString username, QString passwd, UserPermissions permissions) noexcept}\\
+Überladene Methode. Fügt einen neuen Benutzer in die Datenbank ein.\bigskip \\
+\small{bool remove(QString username) noexcept}\\
+Entfernt den Benutzer mit dem Primärschlüssel username aus der Datenbank.\bigskip \\
+\small{UserRow getUser(QString username)}\\
+Liefert den zum username gehörenden Eintrag in der Datenbank zurück.\bigskip \\
+\small{QList<UserRow> getUsers(UserPermissions permissions)}\\
+Liefert eine Liste aller Benutzer mit den gewählten Berechtigungen zurück.\bigskip \\
+\small{bool update(QString username, QString passwd) noexcept}\\
+Aktualisiert das Passwort des übergebenen Benutzers.\bigskip \\
+\small{bool update(QString username, QString passwd, UserPermissions permissions) noexcept}\\
+Aktualisiert das Passwort und die Berechtigungen des übergebenen Benutzers.\bigskip \\
+\small{bool update(QString username, UserPermissions permissions) noexcept}\\
+Aktualisiert die Berechtigungen des übergebenen Benutzers.\bigskip \\
+\small{UserTable(QString tablename, QString namecolumn, QString passwdcolumn, QString rolecolumn) noexcept}\\
+Erzeugt ein UserTable-Objekt unter Spezifizierung des Tabellennamen und der Spaltennamen.\bigskip \\
+\small{\~{}UserTable()}\\
+Zerstört das Objekt.\bigskip \\
+Hinweis: Alle Methoden, die auf die Datenbank zugreifen, öffnen die Datenbankverbindung und schließen diese nach Ausführung der Operationen wieder.
+

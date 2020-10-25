@@ -1,0 +1,10 @@
+\section{Verteilungssicht (DH)}
+In der Verteilungssicht wird dargestellt, wie die Anwendung LibOrg betrieben wird. Da die Anwendung als C++-Programm umgesetzt ist, ist sie vom Betriebssystem und dessen Architektur abhängig. Damit die Architekturabhängigkeit unproblematischer wird, ist die Anwendung als 32-bit-Version compiliert worden. Damit kann die Anwendung auch auf 64-bit-Systemen ausgeführt werden. Die Betriebssystemabhängigkeit kann nur indirekt umgangen werden: Durch den Einsatz von Qt kann die Anwendung sowohl für Windows als auch für Linux und MacOS compiliert werden. Für jedes System wird daher eine eigene ausführbare Datei benötigt.\bigskip \\
+Derzeit ist nur eine Version für Windows erstellt worden. Zur Installation der Anwendung auf einem Windows-PC steht ein Setup (ein Windows-Installer) zur Verfügung. Details zur Implementierung des Installers befinden sich in Anhang \ref{INSTALLER_HOWTO}.\bigskip \\
+Damit die Anwendung installiert werden kann und lauffähig ist, sind folgende Voraussetzungen einzuhalten:
+\begin{itemize}
+	\item C++ Runtime Environment (Bestandteil von Windows)
+	\item 53 MB freien Speicherplatz
+	\item 1 GB Arbeitsspeicher
+\end{itemize}
+Bei der Installation von LibOrg werden die notwendigen dlls (dlls von Qt, baseqt.dll, ExcelReader.dll und db.dll), die Datenbank-Datei, eine Konfigurationsdatei und das Executable auf den Rechner kopiert. 

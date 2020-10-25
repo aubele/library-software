@@ -1,0 +1,23 @@
+In diesem Abschnitt wird die Library zum Auslesen von Excel-Dateien vorgestellt. Leider stellt Qt hierfür keine Funktionalität bereit, verweist jedoch auf die Library FreeXL. Ihr Source-Code kann unter www.gaia-gis.it/fossil/freexl/index heruntergeladen werden und beinhaltet Funktionen, geschrieben in C. Zur besseren Handhabung des Codes ist eine Klasse in C++ geschrieben worden: ExcelReader. Diese Klasse dient als Wrapper um die C-Funktionen von FreeXL.\bigskip \\
+Die Klasse ExcelReader enthält folgende Methoden:
+\begin{description}
+	\item[ ] ExcelReader()\\
+	Erzeugt ein neues Objekt von ExcelReader.
+  \item[ ] int openXLS(QString filename) noexcept\\
+	Liest die übergebene Datei (Achtung nur .xls, altes Excel-Format) ein. Liefert bei erfolgreichem Öffnen XLSFREE\_OK zurück.
+  \item[ ]  int close() noexcept\\
+	Schließt die mit openXLS geöffnete Datei wieder, liefert XLSFREE\_OK bei erfolgreichem Schließen zurück.
+  \item[ ]  unsigned int worksheeds() noexcept\\
+	Liefert die Anzahl der Worksheeds der geöffneten Excel-Datei zurück.
+  \item[ ]  int selectworksheed(unsigned int index) noexcept\\
+	Selektiert das mit index ausgewählte Worksheed und liefert XLSFREE\_OK zurück, wenn das Worksheed selektiert werden konnte.
+  \item[ ]  unsigned int rowsofselectedsheet()\\
+	Liefert die Anzahl der Zeilen des selektierten Worksheeds zurück.
+  \item[ ]  unsigned int columnsofselectedsheet()\\
+	Liefert die Anzahl der Spalten des selektierten Worksheeds zurück.
+  \item[ ]  FreeXL\_CellValue getCellValue(unsigned int row, unsigned short column)\\
+	Liefert den Wert zurück, der sich in der Zeile row und der Spalte column befindet.
+  \item[ ]  \~ExcelReader()\\
+	Zerstört das ExcelReader-Objekt und gibt verwendeten Speicherplatz frei.
+\end{description}
+Der ExcelReader und der Source-Code von FreeXL befindet sich in der dll ExcelReader.dll.

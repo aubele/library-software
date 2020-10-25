@@ -1,0 +1,84 @@
+\section{Randbedingungen (FA)}
+Innerhalb dieses Projektes mussten verschiedene Randbedingungen eingehalten werden. Die organisatorischen Punkte wurden hauptsächlich vom Auftraggeber vorgegeben. Außerdem musste die technische Ausstattung des Auftraggebers beim Definieren der Randbedingungen berücksichtigt werden. Weitere Voraussetzungen wurde innerhalb der Projektgruppe vereinbart, um eine einheitliche und saubere Code-Basis zu garantieren.
+
+\subsection{Technische Randbedingungen}
+Die technischen Randbedingungen orientieren sich stark an der Ausstattung des Auftraggebers. Dabei soll die Software auf einem handelsüblichen Rechner laufen. Dieser ist mit 8GB RAM ausgestattet und besitzt einen Dual-Core-Prozessor. Die Software soll auf diesem Rechner keine Laufzeiteinschränkungen aufweisen. Der Rechner hat derzeit keine Anbindung an das Internet. Somit ist es nicht möglich eine Online-Verbindung zu einer Datenbank herzustellen. Dies bedeutet, dass die Datenbank lokal auf dem Rechner abgespeichert und gewartet werden muss.\\
+Die Software soll auf jedem Windows-Betriebssystem laufen (ab Windows XP). Der entsprechende Rechner des Auftraggebers läuft aktuell unter Windows XP, allerdings ist es jederzeit möglich, dass auf eine neuere Windows-Version umgestiegen wird. Die Software muss auf keinen weiteren Betriebssystemen laufen, da der Auftraggeber ausschließlich Windows benutzt, trotzdem soll die Möglichkeit der Plattformunabhängigkeit gegeben sein.\\
+\\
+Die Software wurde in C++ mithilfe des Qt-Frameworks implementiert. C++ wird verwendet, da eine frei verfügbare und effiziente Hochsprache benötigt wird, welche plattformunabhängig verwendet werden kann. Qt ist dabei ein GUI-Toolkit, welches zum Entwickeln von graphischen Benutzeroberflächen und Programmen eingesetzt wird. Außerdem bietet Qt die Möglichkeit der Anbindung von Datenbanken. Ein weiterer Grund für die Wahl dieser Sprache und des Frameworks ist, dass die Projektgruppe bereits Erfahrung und Wissen hierfür gesammelt hat. Verwendet wurden die Versionen C++17 und Qt 5.9.4, die Software soll dabei auch in neueren Versionen problemlos laufen. Als Datenbank-Framework wurde SQLite benutzt, welches erlaubt lokale Datenbanken anzulegen ohne eine Anbindung an ein entsprechendes Netzwerk.\\
+Da der Quellcode der Anwendung nicht veröffentlicht werden soll, ist darauf zu achten, dass keine Fremdsoftware mit einer GPL (Generell Public Licence) verwendet wird. Generell soll auf Fremdsoftware komplett verzichtet werden. Wenn nötig soll diese jedoch kostenlos und frei verfügbar sein (BSD oder LGPL).
+
+\subsection{Organisatorische Randbedingungen}
+Innerhalb des Projektes tritt Daniel Hörmann als Projektleiter auf, Teil des Projektteams sind außerdem Joshua Hörmann und Fabio Aubele. Prof. Dr. Phillip Heidegger ist der Betreuer des Projektes.\\
+Der grobe Zeitplan des Projektes lässt sich folgendermaßen darstellen:
+\begin{itemize}
+	\item Februar/März 2018 - Behandlung sämtlicher organisatorischer Punkte
+	\item April 2018 - Beginn der Entwicklung
+	\item Mai 2018 - Erster lauffähiger Prototyp
+	\item Juli 2018 - Erste lauffähige Vollversion mit allen Hauptfunktionen
+	\item August 2018 - Test-Phase und Bugfixing (evtl. noch Erweiterungen)
+	\item September 2018 - Installation beim Kunden
+	\item Oktober/November 2018 - Verbesserungen und weitere Features für zweite Vollversion
+\end{itemize}
+Das Vorgehensmodell soll dem Prototyping ähneln. Dabei soll von Anfang an ein lauffähiger Prototyp entwickelt werden, welcher repetitiv mit den gewünschten Funktionen erweitert wird. Nach dem Hinzufügen einer Funktion soll diese ausgiebig getestet und eventuell überarbeitet werden. Der Prototyp soll dabei auch dem Kunden vorgeführt werden, damit dieser mögliche Änderungswünsche äußern kann. Während der Entwicklung soll der komplette Quellcode stetig kommentiert werden. Eine Dokumentation des Projektes nach der Vorlage von arc42 \cite{arc42} ist ein zentrales Ergebnis dieser Arbeit.  \\
+Der Entwurf sämtlicher Benutzeroberflächen soll entweder durch Stift und Papier oder mithilfe von digitalen Mock-Ups angefertigt werden. Für die Datenbank gibt es ein zentrales Modell, welches die Beziehungen der einzelnen Tabellen beschreibt. Dieses zentrale Modell soll immer aktuell gehalten werden. Sämtliche Anforderungen und weitere Details zur Software sollen innerhalb eines Lastenheftes zusammengefasst werden. Aus diesem Dokument werden die entsprechenden Aufgaben definiert, welche mithilfe eines Taskboards von Git dargestellt und zugewiesen werden. Als Entwicklungsumgebung wird der Qt-Creator benutzt, welcher das Entwickeln mit dem Qt-Framework erleichtert. Zum Erstellen und Bearbeiten der Datenbank wurde 'DB Browser for SQLite' verwendet.\\
+Als Konfigurations- und Versionsverwaltung wird GitLab benutzt. GitLab besitzt ein eigenes Issue-System zur Dokumentation von Bugs und Verbesserungen, dieses soll aktiv benutzt werden.\\
+Für die anzufertigende Datenbank-API sollen Unit-Tests mit dem Qt-Framework erstellt werden. Diese Unit-Tests ermöglichen die Überprüfung der Korrektheit der einzelnen Funktionen. Falls in einem späteren Entwicklungsschritt die Datenbank nochmals erweitert werden soll, ist die Korrektheit der einzelnen Funktionen nochmals durch die Unit-Tests überprüfbar. Sonstige Funktionen und Logik sollen anhand von Excel-Listen getestet werden. Diese Listen basieren auf dem Lastenheft und nennen die gewünschten Funktionen, welche auf Korrektheit überprüft werden sollen. Wurde eine Funktion getestet, soll das resultierende Testergebnis in die Liste eingetragen werden.
+
+\subsection{Konventionen (DH)}
+\label{KONVENTIONEN}
+Die Gliederung der Dokumentation orientiert sich an dem deutschen arc42-Template in der Version 6.0 \cite{arc42}. \\
+Für die Implementierung der Anwendung gelten nachfolgende Designvorschriften:\bigskip \\
+\underline{Includierung von Headern}\\
+In C$++$ existieren innerhalb der Standardbibliothek und auch innerhalb von Qt jeweils Headerdateien mit der Endung "`.h"' und Headerdateien ohne Endung. Es sind stets die Headerdateien zu includieren, die keine Endung haben \cite[vgl.][]{C_Foundation}.\bigskip \\
+\underline{Namespace}\\
+Für Funktionen aus der C$++$-Standardbibliothek ist jeweils der Namespace anzugeben. Wird eine Funktion aus einem Namespace öfters hintereinander benötigt, kann die Funktion mit einem using-Statement lokal eingebunden werden. Beispiel: using std::cout; \cite[vgl.][]{C_Foundation}.\bigskip \\
+\underline{Der Operator ?:}\\
+Der ternäre "`?:"'-Operator sollte vermieden werden. In der Regel ist eine if-Abfrage sinnvoller und kann einfacher erweitert werden.\bigskip \\
+\underline{Verknüpfung von Funktionen}\\
+Liefert eine Funktion einen boolschen Wert zurück, so könnte die Funktion mit einer weiteren Funktion durch den "`\&\&"'-Operator verknüpft werden. Dabei würde die zweite Funktion nur ausgeführt, wenn die erste Funktion true zurückliefert. Dieses Konstrukt ist nicht erlaubt, statt dessen muss mit einer if-Anweisung der Rückgabewert der ersten Funktion überprüft werden und nur dann die zweite Funktion aufgerufen werden, wenn die if-Abfrage ein entsprechendes Ergebnis liefert \cite[vgl.][]{C_Foundation}.\bigskip \\
+\underline{Benennung und Anlegung von lokalen Variablen}\\
+Lokale Variablen sollten möglichst nahe an der ersten Verwendung deklariert werden. Bei der Benennung gibt es zu beachten, dass Camel-Case zu verwenden und die Variable eindeutig in englischer Sprache zu benennen. Der Name sollte keine Typenkürzel oder ähnliches enthalten. Ein sinnvoller und verständlicher Name ist ausreichend. Jede Variable ist in einer Zeile zu deklarieren \cite[vgl.][]{C_Foundation}.\bigskip \\
+\underline{Klassenmember}\\
+Membervariablen von Klassen sollten mit einem "`m"' beginnen. Anschließend folgt ein sinnvoller und aussagekräftiger Name im Camel-Case. Beispiel: mCounter. Jedes Member ist in einer eigenen Zeile zu deklarieren. \bigskip \\
+\underline{Globale Variablen}\\
+In der Regel sind globale Variablen verboten, da sie den Code schwer lesbar machen. Von diesem Verbot kann bei Notlage abgewichen werden, dies sollte im Projekt aber nicht notwendig sein.\bigskip \\
+\underline{Benennung von Methoden / Funktionen}\\
+Methoden sollen einen sinnvollen und ausdrucksstarken Namen im Form des Camel-Case erhalten. Gleiches gilt für die Parameter. Unterstriche dürfen nicht verwendet werden.\bigskip \\
+\underline{PIMPL-Idiom}\\
+Das PIMPL-Idiom (Pointer-to-Implementation) ist ausnahmslos verboten, da die Wartung des Codes dahingehend erschwert werden, als dass die internen Variablen einer Klasse nicht mehr beobachtet werden können. Des Weiteren verschlechtert das PIMPL-Idiom die Lesbarkeit und verringert die Geschwindigkeit.\bigskip \\
+\underline{Methoden ohne Exceptions}\\
+Methoden, die keine Exceptions im Code auslösen werden mit "`noexcept"' am Ende der Deklaration abgeschlossen.\bigskip \\
+\underline{Leere Pointer}\\
+Um einen Pointer auf die Null-Adresse zu setzen muss das Macro nullptr verwendet werden.\bigskip \\
+\underline{Blockscope}\\
+Funktionen dürfen nicht innerhalb eines Blockes deklariert werden.\bigskip \\
+\underline{Typen}\\
+Die meisten C$++$-Standardtypen (int, float, double, etc.) sind auf allen Plattformen gleich. Dies gilt jedoch nicht für die signed und unsigned Varianten dieser Typen (Ausnahme bei char). Aus diesem Grund sind alle (un)signed Typen (außer char) verboten \cite[vgl.][]{HIC_1}.\bigskip \\
+\underline{Array als Parameter}\\
+Arrays werden in C$++$ normalerweise als Pointer übergeben. Folgendes Beispiel stellt eine alternative hierfür dar. Dabei wird auch die Größe der Arrays mit angegeben. Beispiel: "`void i (int (\&a) [10]);"' \cite[vgl.][]{HIC_2}.\bigskip \\
+\underline{Downcast}\\
+Der Cast eines Objektes einer Basisklasse zu einer abgeleiten Klasse ist verboten. Hierfür sind virtuelle Methoden vorzusehen \cite[vgl.][]{HIC_3}.\bigskip \\
+\underline{Lambda-Ausdrücke}\\
+Die Formulierung von Lambda-Ausdrücken in C$++$ ist - auch wenn möglich - strikt untersagt.\bigskip \\
+\underline{Literale}\\
+Konstanten sollten entweder als const-Variablen angelegt oder per defines definiert werden.\bigskip \\
+\underline{Sprungbefehle}\\
+Sprungbefehle (break, goto, continue) sind generell verboten. Die Verwendung von break ist jedoch in switch-Anweisungen erlaubt.\bigskip \\
+\underline{Arraylänge in Schleifen}\\
+Für die Bestimmung der Arraygröße innerhalb einer Schleife muss folgende Zeile benutzt werden:\\
+"`(sizeof(array)/sizeof($*$array))"' \cite[vgl.][]{HIC_4}. \bigskip \\
+\underline{Kontrollstrukturen}\\
+Bei jeder Kontrollstruktur sind die geschweiften Klammern immer zu setzen, auch wenn sie nicht notwendig wären. Jede geschweifte Klammer gehört in eine eigene Zeile.\bigskip \\
+\underline{Methodenüberladung}\\
+Bei der Überladung einer virtuellen Methode wird bei der Methode, die die andere Methode überschreibt, nicht virtual sondern "`override"' angehängt \cite[vgl.][]{HIC_5}.\\ { } \bigskip \\
+\underline{Friend-Deklaration}\\
+Die friend-Beziehung darf nicht verwendet werden!\bigskip \\
+\underline{Rückgaben}\\
+Wenn eine Funktion ein Objekt zurückgibt, so darf dies entweder als Objekt selber oder als Pointer zurückgegeben werden. Referenzen als Rückgaben sind verboten. Eine Ausnahme stellt die Überladung von Operatoren dar.\bigskip \\
+\underline{Kommentare}\\
+Jedes öffentliche Member einer Klasse muss kommentiert werden. Dies beinhaltet Variablen und Methoden sowie enums. Durch die Kommentierung sollen Variablen mit einer Beschreibung, wofür diese vorhanden sind, versehen werden. Bei Methoden muss beschrieben werden, welche Aufgabe diese hat. Außerdem müssen die Parameter erläutert werden.\bigskip \\
+\underline{Benennung von Headern}\\
+Headerdateien sollen sinnvoll benannt werden. Ist die Headerdatei Bestandteil einer Bibliothek so ist diese Headerdatei ohne die Endung "`.h"' anzulegen, anderenfalls zwingend mit "`.h"'.\\
+\\
+Die gesamte Dokumentation, inklusive der Diagramme, Modelle oder anderen Grafiken, ist in Deutsch verfasst, da das Projektteam und der Auftraggeber deutschsprachig sind und die Dokumentation ausschließlich von diesen Personen benötigt wird. Die komplette Benennung von Klassen, Methoden, Variablen und Kommentaren wird im C++-Quellcode in englischer Sprache verfasst.

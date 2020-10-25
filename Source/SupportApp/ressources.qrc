@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>icons/Settings.png</file>
+        <file>icons/Sync.png</file>
+    </qresource>
+</RCC>

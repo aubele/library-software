@@ -1,0 +1,30 @@
+\section{Risiken (JH)}
+Bei LibOrg handelt es sich um ein klassisches Softwareprojekt. Daher sind die Risiken recht überschaubar. Im folgenden wird auf die wichtigsten eingegangen und eine Eventualfallplanung und eine Risikominderung vorgeschlagen.
+
+\subsection{Risiko: Kundenkommunikation}
+Da das Projekt für die Schulbücherei des Holbein-Gymnasiums entwickelt wird, spielt die Kommunikation mit dem Verantwortlichen eine entscheidende Rolle, da die Software auf seine Bedürftnisse zugeschnitten sein sollte. Der Verwantwortliche hat aber noch andere Aufgaben neben der Schulbücherei zu erledigen und die Schulferien frei, daher ist die Kommunikation erschwert.
+\subsubsection{Eventualfallplanung}
+Sollte es zu Kommunikationsproblemen kommen, verzögern sich einzelne Projektschritte und es kann nicht weiter gearbeitet werden.
+\subsubsection{Risikominderung}
+Um diesem Fall entgegen zu wirken, wurden vorab die grunglegenden Funktionalitäten festgelegt und Screenshots der alten Software angefertigt. Auf diese Informationen kann zurückgegriffen werden, um weiter an der Software arbeiten zu können.
+
+\subsection{Risiko: Funktion der Datenbank-API}
+Eines der wichtigsten Teile der Software stellt die Datenbank-API dar. Sie sorgt dafür, dass die Daten reibungslos, zwischen Hauptanwendung und Datenbank, ausgetauscht werden. Daher ist sicherzustellen, dass diese API zu jedem Zeitpunkt fehlerfrei funktioniert. 
+\subsubsection{Eventualfallplanung}
+Wenn die Datenbank-API nicht funktioniert, ist die gesamte Software nicht funktionsfähig. Da keine Daten mehr in die Datenbank gespeichert werden können und \/ oder keine Daten mehr aus der Datenbank abgefragt werden können. Daher gilt es diese Situation in jedem Fall zu vermeiden.
+\subsubsection{Risikominderung}
+Dieses Risiko wird durch Unit-Tests abgesichert, welche die wichtigsten Funktionen der API testen. Diese Funktionen können automatisiert durchgeführt werden und erleichtern Anpassungen deutlich.
+
+\subsection{Risiko: Ressourcenproblem}
+Da es sich bei LibOrg um ein Studentenprojekt handelt und die Teilnehmer auch andere Veranstaltungen im Rahmen ihres Studiums wahrnehmen müssen kann es zu einem Ressourcenproblem kommen. Hinzu kommt, dass pro Person 300 Arbeitsstunden für das Projekt vorgesehen sind, welche eingehalten werden sollten.
+\subsubsection{Eventualfallplanung}
+Insofern nicht das ganze Projektteam betroffen ist, können die wichtigen Aufgaben auf die anderen Mitglieder verteilt werden. Sollte das ganze Team betroffen sein, verschiebt sich die Fertigstellung des Projektes. 
+\subsubsection{Risikominderung}
+Das Projektteam hat sich geeinigt, in den Semesterferien weiter am Projekt zu arbeiten. Da dort keine anderen Aufgaben für das Studium erledigt werden müssen, kann man sich dort voll und ganz auf das Projekt konzentrieren und es drohen nur Ausfälle aufgrund von Krankheit oder anderer persönlicher Umstände.
+
+%\subsection{Risiko: Einhaltung des Scrum-Vorgehensmodells}
+%Wir haben uns beim Vorgehensmodell für Scrum entschieden. Dadurch entsteht das Risiko, dass wir zu gewohnten Mustern, wie dem Wasserfallmodel zurückfallen und uns nicht an das Scrummodell halten. Wenn das passieren sollte leidet die Flexibilität des Projektes und der Kommunikations- sowie der Zeitaufwand für die einzelnen Bestandteile steigt.
+%\subsubsection{Eventualfallplanung}
+%Wenn der oben gennante Fall eintreten sollte, wäre das kein großer Schaden für das Projekt. Es würde sich allerdings der Zeitpunkt der Fertigstellung deutlich verzögern.
+%\subsubsection{Risikominderung}
+%Das Vorgehen des Projektes wird vom Projektleiter, sowie von den Teilnehmern, in regelmäßigen Meetings überwacht.

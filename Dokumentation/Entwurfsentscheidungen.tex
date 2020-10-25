@@ -1,0 +1,24 @@
+\section{Entwurfsentscheidungen (DH)}
+In diesem Kapitel werden grundlegende Entwurfsentscheidungen vorgestellt.
+
+\subsection{Aufteilung des Quellcodes}
+\textbf{Zur Fragestellung}\\
+Die Anwendung muss einfach zu warten und zu pflegen sein. Dabei soll die Struktur der Anwendung, also die Quellcodestruktur, übersichtlich gestaltet sein. Hier stellt sich nun die Frage, wie der Quellcode am besten organisiert und aufgeteilt wird.\bigskip \\
+Der Quellcode kann entweder in einem einzigen Projekt oder in Bibliotheksprojekten und einem Hauptprojekt verwaltet werden.\bigskip \\
+\textbf{Relevante Einflussfaktoren}
+\begin{itemize}
+	\item die gewählte Struktur muss für Windows, Linux und MacOS anwendbar sein
+	\item betroffenes Qualitätsziel: Wartbarkeit
+\end{itemize}
+\textbf{Betrachtete Alternativen}\\
+Wie schon erwähnt gibt es zwei Optionen: Der gesamte Quellcode kann in einem Projekt verwaltet werden, oder der Quellcode wird in ein Hauptprojekt und Bibliotheken (dlls) aufgeteilt.\\
+Befindet sich der gesamte Quellcode in einem Projekt, so sind alle Funktionen und Klassen leicht innerhalb des Projektes auffindbar. Es müssen keine weiteren Verwaltungsmaßnahmen wie bei der Aufteilung in dlls beachtet werden. Durch die Aufteilung in dlls wird die Auffindbarkeit erstmal erschwert. Dies kann verbessert werden, indem die dlls sinnvoll benannt sind und die Anwendung genug Quellcodedateien besitzt. Des Weiteren bieten dlls den Vorteil, dass Code wiederverwendbar wird und sich dadurch der Wartungsaufwand, bei der Verwendung in mehreren Projekten, deutlich reduziert.\bigskip \\
+\textbf{Entscheidung}\\
+Da die Anwendung entsprechend viel Code erfordert und sich Teile der Anwendung in anderen Projekten wieder verwerten lassen, ist die Entscheidung, zur Aufteilung des Quellcodes, wie folgt gefallen:
+\begin{itemize}
+	\item baseqt.dll: enthält Klassen für die Konfiguration, sowie für die Anzeige von Lizenzen und der Version des Programmes.
+	\item ExcelReader.dll: ist ein Klassenkonstrukt zum Auslesen von Exceldateien.
+	\item db.dll: beinhaltet die Datenbank-API.
+	\item MainProject: Hauptprojekt, dass die dlls einbindet und spezifische Funktionen implementiert.
+\end{itemize}
+Wie dlls in Qt erzeugt werden, ist im Anhang \ref{DLLs_HOWTO} erläutert.

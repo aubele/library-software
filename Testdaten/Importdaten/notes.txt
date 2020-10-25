@@ -1,0 +1,12 @@
+Dieser Ordner enthält drei beispielhafte Importdateien:
+- für die Q11: Jahrgangsliste_2017-19_Q11_Belegungsdaten.xls
+- für die Q12: Jahrgangsliste_2016-18_Q12_Belegungsdaten.xls
+- für alle anderen Klassen: Schülerliste für lernmittelfreie Bibliothek.xlsx
+
+Alle Dateien sind damit als Excel-Tabellen verfügbar. Diese können jedoch in Textdateien (csv-Dateien)
+konvertiert werden.
+
+Die ersten beiden Spalten bei der Oberstufe sind die Seminare. Diese erhalten keine Bücher. Kurse, die mit
+einem ";" beginnen erhalten ebenfalls keine Bücher.
+
+In jeder Importdatei gibt es einen Nach- und Vorname mit Ö.

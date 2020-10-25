@@ -1,0 +1,191 @@
+\subsection{Konfiguration (DH)}
+Damit Anwender diverse Einstellungen an der Software vornehmen und diese permanent speichern können, wird eine Klassenbibliothek für die Verwaltung von Konfigurationseinträgen erstellt. Zudem soll die Bibliothek in der Lage sein, anhand der vorhandenen Konfigurationseinträge eine automatische Oberfläche für die Änderung der Konfigurationseinträge zu generieren.
+
+\subsubsection{Benötigte Typen}
+Um die Form der Konfigurationsdatei zu bestimmen, wird zunächst betrachtet, welche Art von Einträgen sich in einer Konfiguration befinden können. Diese sind in Tabelle \ref{tab:Konfigurationstypen} aufgelistet. Außerdem wird jedem Typ ein Darstellungselement zugeordnet.
+\begin{table}[htb]
+	\centering
+	\caption{Konfigurationstypen}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			Boolsche Werte (1: True, 0: False) & Checkbox & bool \\ \hline
+			Text (ggf. mit Längenbeschränkung) & LineEdit & string\\ \hline
+			Text mit Vorauswahl (ggf. mit Längenbeschränkung) & ComboBox & chosestring\\ \hline
+			Text mit Vorauswahl und Eingabemöglichkeit & ComboBox & choseentrystring \\ \hline
+			Ganzzahlen & SpinBox & int\\ \hline
+			Gleitzahlen & DoubleSpinBox & double\\ \hline
+			RGB-Farbe & LineEdit + Button & rgbcolor\\ \hline
+			Blöcke & GroupBox & siehe unten\\ \hline
+			Kommentare / Beschreibungen & Label & siehe unten \\ \hline
+			Read-only Werte & Element nur lesend & \\ \hline
+		\end{tabular}
+	\label{tab:Konfigurationstypen}
+\end{table}
+
+\subsubsection{Format der Konfigurationsdateien}
+Nachdem alle notwendigen Typen ermittelt wurden, wird die Struktur der Konfigurationseinträge bestimmt. Tabelle \ref{tab:Konfigurationsoptionen} enthält alle verwendbaren Zeichen und deren Bedeutung.
+\begin{table}[htb]
+	\centering
+	\caption{Konfigurationsoptionen}
+		\begin{tabular}{|c|c|}
+			\hline
+			$[$ $]$ & Blockname \\ \hline
+			\# & Kommentar / Beschreibung \\ \hline
+			$<$ $>$ & Auswahlmöglichkeiten \\ \hline
+			; & Wertetrennung \\ \hline
+			: & Typ \\ \hline
+			$=$ & Wertzuweisung \\ \hline
+			$($ $)$ & Bereichsangabe / Länge \\ \hline
+			\{ \} & readonly \\ \hline
+			\#! & Startkommentar \\ \hline
+		\end{tabular}
+	\label{tab:Konfigurationsoptionen}
+\end{table}
+Um die Syntax der Konfigurationsdateien zu beschreiben, wird nachfolgendes Beispiel verwendet, das alle Konfigurationsoptionen enthält.
+\begin{verbatim}
+#! Beispiel-Konfig example.config
+# Erster Block
+[Erster Block]
+# Ganzzahliger Schlüssel mit Minimum und Maximum
+Var1: int = 5
+(1;5)
+
+# Boolscher Schlüssel
+Var2: bool = 1
+
+# Text mit Länge 5
+Var3: string = Hallo
+(5)
+
+# Text mit Vorauswahl
+Var4: chosestring = H1
+<H1; H2; H3>
+
+# Text mit Vorauswahl und Eingabemöglichkeit
+Var5: choseentrystring = H1
+<H1; H2; H3>
+
+# Gleitzahl read-only
+{Var6: double = 6.3}
+\end{verbatim}
+
+\subsubsection{VariousValue}
+VariousValue wird benutzt, um die QVariant-Klasse von Qt nachzubilden. Die Klasse kann damit mehrere verschiedene Datentypen beinhalten, ohne auf das QMetaSystem zugreifen zu müssen.\bigskip \\
+\textbf{Header:} variousvalue.h\bigskip \\
+\textbf{Library:} baseqt.dll\bigskip \\
+\textbf{enum}\\
+type: Int, Double, Text, SelectText, SelectEntryText, Bool, RGB\_Color\bigskip \\
+\textbf{Öffentliche Methoden}\\
+\small{VariousValue(type valuetype, QString value)}\\
+Erzeugt ein VariousValue-Objekt.\bigskip \\
+\small{int asInt()}\\
+Liefert den Wert des VariousValue falls möglich als integer zurück.\bigskip \\
+\small{double asDouble()}\\
+Liefert den Wert des VariousValue falls möglich als double zurück.\bigskip \\
+\small{bool asBool()}\\
+Liefert den Wert des VariousValue falls möglich als bool zurück.\bigskip \\
+\small{QString asText() noexcept}\\
+Liefert den Wert des VariousValue falls möglich als QString zurück.\bigskip \\
+\small{QColor asColor()}\\
+Liefert den Wert des VariousValue falls möglich als QColor zurück.\bigskip \\
+\small{bool setValue(QString newvalue) noexcept}\\
+Aktualisiert den Wert des VariousValue-Objektes, liefert true zurück, wenn dies erfolgreich war.\bigskip \\
+\small{type getType()}\\
+Liefert den Typ des VariousValue-Objektes.
+
+\subsubsection{ConfigObserver}
+Abstrakte Klasse, die die Config-Objekte beobachten kann.\bigskip \\
+\textbf{Header:} config.h\bigskip \\
+\textbf{Library:} baseqt.dll\bigskip \\
+\textbf{enum}\\
+Action: ADDED, REMOVED, MODIFIED\bigskip \\
+\textbf{Öffentliche Methoden}\\
+\small{virtual void cfgblockchanged(QString blockname, Action action) noexcept = 0}\\
+Wird von der Config-Klasse aufgerufen, wenn sich ein Block der Konfiguration geändert hat.\bigskip \\
+\small{virtual void cfgkeyofblockchanged(QString blockname, QString keyname, Action action) noexcept = 0}\\
+Wird von der Config-Klasse aufgerufen, wenn sich ein Schlüssel eines Blocks der Konfiguration geändert hat.
+
+\subsubsection{Config}
+Die Klasse Config besteht aus Blöcken, welche wiederum aus den Konfigurationsschlüsseln bestehen.\bigskip \\
+\textbf{Header:} config.h\bigskip \\
+\textbf{Library:} baseqt.dll\bigskip \\
+\textbf{Öffentliche Methoden}\\
+\small{Config(QString cfgName, QString path)}\\
+Erzeugt ein Config-Objekt ohne Blöcke und Schlüssel.\bigskip \\
+\small{\~{}Config()}\\
+Zerstört das Objekt inklusive aller Blöcke und Schlüssel.\bigskip \\
+\small{QString getConfigName() noexcept}\\
+Liefert den Namen des Config-Objektes.\bigskip \\
+\small{QString getConfigComment}\\
+Liefert den Kommentar der Konfiguration.\bigskip \\
+\small{bool isModified() noexcept}\\
+Liefert, ob das Config-Objekt verändert wurde.\bigskip \\
+\small{void attach(ConfigObserver* observer) noexcept}\\
+Hängt einen neuen Observer an die Konfiguration an.\bigskip \\
+\small{void detach(ConfigObserver* observer) noexcept}\\
+Entfernt den übergebenen Oberserver von der Konfiguration. \bigskip \\
+\small{VariousValue getValueForKeyInBlock(QString blockname, QString keyname, VariousValue defaultvalue) noexcept}\\
+Liefert den Wert des Schlüssels in dem spezifizierten Block der Konfiguration zurück. Ist kein gültiger Schlüssel vorhanden, wird der defaultvalue zurückgegeben.\bigskip \\
+\small{bool addBlock(QString blockname, QString blockcomment) noexcept}\\
+Fügt einen neuen Block an die Konfiguration an.\bigskip \\
+\small{void removeBlock (QString blockname) noexcept}\\
+Entfernt einen Block aus der Konfiguration.\bigskip \\
+\small{QString getCommentOfBlock(QString blockname)}\\
+Liefert den Kommentar eines Blocks einer Konfiguration. \bigskip \\
+\small{QList<QString> getAllBlocks() noexcept}\\
+Liefert eine Liste mit allen vorhandenen Blöcken der Konfiguration.\bigskip \\
+\small{QList<QString> getAllKeysOfBlock(QString blockname)}\\
+Liefert alle Schlüssel eines Blocks der Konfiguration.\bigskip\\
+\small{bool addKeyToBlock(QString blockname, QString keyname, QString keycomment, VariousValue value, bool isReadOnly = false) noexcept}\\
+Fügt einen Schlüssel an den Block einer Konfiguration an.\bigskip \\
+\small{bool removeKeyFromBlock(QString blockname, QString keyname) noexcept}\\
+Entfernt einen Schlüssel von einem Block der Konfiguration.\bigskip \\
+\small{QString getCommentOfKeyInBlock(QString blockname, QString keyname)}\\
+Liefert den Kommentar eines Schlüssels eines Blocks der Konfiguration zurück.\bigskip\\
+\small{bool setValueForKeyInBlock(QString blockname, QString keyname, QString value)}\\
+Setzt den Wert eines Schlüssels eines Blocks der Konfiguration neu.\bigskip \\
+\small{VariousValue getMinValueOfKeyInBlock (QString blockname, QString keyname)}\\
+Liefert den minimalen Wert eines Schlüssels.\bigskip \\
+\small{VariousValue getMaxValueOfKeyInBlock(QString blockname, QString keyname)}\\
+Liefert den maximalen Wert eines Schlüssels.\bigskip \\
+\small{int getMaxLengthOfKeyInBlock(QString blockname, QString keyname)}\\
+Liefert die maximale Eingabelänge eines Schlüssels.\bigskip \\
+\small{bool setMinValueForKeyInBlock(QString blockname, QString keyname, VariousValue minValue) noexcept}\\
+Setzt einen minimalen Wert auf einen Schlüssel.\bigskip \\
+\small{bool setMaxValueForKeyInBlock(QString blockname, QString keyname, VariousValue maxValue) noexcept}\\
+Setzt einen maximalen Wert auf einen Schlüssel.\bigskip \\
+\small{bool setMaxLengthForKeyInBlock(QString blockname, QString keyname, int value) noexcept}\\
+Setzt eine maximale Eingabelänge auf einen Schlüssel.\bigskip \\
+\small{VariousValue::type getTypeOfKeyInBlock(QString blockname, QString keyname)}\\
+Liefert den Type des Konfigurationsschlüssels zurück.\bigskip \\
+\small{bool isKeyReadOnlyOfBlock(QString blockname, QString keyname)}\\
+Liefert zurück, ob der Schlüssel nur gelesen werden darf.\bigskip \\
+\small{bool addPossibleValueToKeyInBlock(QString blockname, QString keyname, QString value) noexcept}\\
+Fügt einen Auswahlwert zum Konfigurationsschlüssel hinzu.\bigskip \\
+\small{QList<QString> getPossibleValuesOfKeyInBlock(QString blockname, QString keyname)}\\
+Liefert alle Auswahlwerte des Schlüssels zurück.\bigskip \\
+\small{bool hasKeyPossibleValuesInBlock(QString blockname, QString keyname)}\\
+Liefert zurück, ob der Schlüssel Auswahlwerte besitzt.\bigskip \\
+\small{bool hasKeyMinValueInBlock(QString blockname, QString keyname)}\\
+Liefert zurück, ob der Schlüssel einen minimalen Wert besitzt.\\		
+\small{bool hasKeyMaxValueInBlock(QString blockname, QString keyname)}\\
+Liefert zurück, ob der Schlüssel einen maximalen Wert besitzt.\\
+\small{bool hasKeyMaxLengthInBlock(QString blockname, QString keyname)}\\
+Liefert zurück, ob der Schlüssel eine maximale Eingabelänge besitzt.\bigskip \\	
+\small{bool setKeyInBlockReadOnly(QString blockname, QString keyname, bool value) noexcept}\\
+Setzt den Schlüssel schreibgeschützt.\bigskip \\
+\small{bool save() noexcept}\\
+Speichert die Konfiguration ab.\bigskip \\
+\small{bool load() noexcept}\\
+Lädt eine Konfigurationsdatei.
+
+\subsubsection{ConfigCache}
+Die Klasse ConfigCache speichert Config-Objekte zur erneuten Verwendung zwischen.\bigskip \\
+\textbf{Header:} configcache.h\bigskip \\
+\textbf{Library:} baseqt.dll\bigskip \\
+\textbf{Öffentliche Methoden}\\
+\small{static Config* getConfig (QString configName)}\\
+Liefert eine Referenz auf das entsprechende Config-Objekt zurück. Existiert das Objekt im Cache noch nicht, so wird dieses erzeugt.\bigskip \\
+\small{static void deleteCache() noexcept}\\
+Leert den Cache.
+

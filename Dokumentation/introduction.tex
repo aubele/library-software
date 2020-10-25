@@ -1,0 +1,66 @@
+\section{Einführung (DH)}
+In diesem Kapitel wird die Aufgabenstellung des Projektes beschrieben. Außerdem werden Qualitätsziele, die erreicht werden sollen, genannt. Abschließend werden die Stakeholder der Software, die in diesem Projekt entwickelt wird, betrachtet.
+
+\subsection{Aufgabenstellung}
+\emph{Was ist LibOrg}\\
+Die entwickelte Software LibOrg (Abkürzung für Library Organizer) ist eine Bibliotheksanwendung, die speziell für lehrmittelfreie Büchereien geeignet ist. Die Anwendung unterstützt bei der Verwaltung der Bücher. Unter Verwaltung wird dabei die Speicherung und Verarbeitung von Ausleih-, Rückgabe- und Schülerdaten verstanden. Ziel der Anwendung ist es nicht, für klassische Bibliotheken verwendbar zu sein.\bigskip \\
+\emph{Features}
+\begin{itemize}
+	\item Ausleihen von Büchern pro Klasse beziehungsweise pro Kurs bei Oberstufenschülern
+	\item Rückgabe von Büchern klassenweise beziehungsweise einzeln bei Oberstufenschülern
+	\item Import der Schüler aus den Exportdateien der Programme ASV und WinQD (die Programme werden in den Kapiteln \ref{DEF:ASV} und \ref{DEF:WINQD} erläutert).
+	\item Anlegen und Bearbeiten von Büchern und Schülern
+\end{itemize}
+
+\subsection{Qualitätsziele}
+Tabelle \ref{tab:Qualitätsziele} beschreibt die einzelnen Qualitätsziele von LibOrg. Das wichtigste Qualitätsziel wird als erstes, das unwichtigste als letztes genannt.
+\begin{table}[H]
+	\centering
+	\caption{Qualitätsziele}
+	\label{tab:Qualitätsziele}
+		\begin{tabular}{|l|l|}
+			\hline
+		Qualitätsmerkmal & Erläuterung \\ \hline
+		Schnelle Abarbeitung der Aufträge & Da die Schüler schnell mit den Büchern versorgt werden sollen \\
+		& und Wartezeiten minimiert werden müssen, arbeitet die Software \\
+		& möglichst effizient. Außerdem enthält die Software keine unnötigen \\
+		& Arbeitsschritte. \\ \hline
+		Übersichtlichkeit & Die Software ist einfach und gut strukturiert, Funktionen sind leicht \\
+		& zu finden. \\ \hline
+		Verständlichkeit & Die Software ist so strukturiert, dass sie selbsterklärend ist.\\
+		& Dies ist vor allem für die unterstützenden Schüler wichtig. \\ \hline
+		Wartbarkeit & Die Software muss schnell und leicht verbessert und erneuert \\
+		& werden können. \\ \hline
+		Funktionalität & Die Software arbeitet fehlerfrei. \\ \hline
+		\end{tabular}
+\end{table}
+Die genannten Qualitätsziele werden später durch die Qualitätsszenarien überprüft.
+
+\subsection{Stakeholder}
+\subsubsection{Überblick}
+Die Stakeholder von LibOrg sind in Tabelle \ref{tab:Stakeholder} aufgelistet. Zusätzlich wird deren Interesse an der Software genannt.
+\begin{table}[htb]
+	\centering
+	\caption{Stakeholder}
+	\label{tab:Stakeholder}
+		\begin{tabular}{|l|l|}
+			\hline
+			Stakeholder & Interesse \\ \hline
+			Techniker des Kunden & \textbullet{} Lösung des umständlichen Imports\\
+				& \textbullet{} Verminderung des Wartungsaufwands \\ \hline
+			Unterstützende Schüler & 	\textbullet{} Arbeiten mit dem Programm, d.h. sie führen Ausleihen und Rückgaben durch \\ \hline
+			Bibliotheks- & \textbullet{} hat die Software in Auftrag gegeben \\ 
+			verantwortlicher &	\textbullet{} ist der Hauptanwender der Software, d.h. er verwaltet die Schüler, \\
+			& Bücher und führt Ausleihen und Rückgaben durch \\ \hline
+		\end{tabular}
+\end{table}
+
+\subsubsection{Persona}
+Die in der Übersicht genannten unterstützenden Schüler und der Kunde werden durch die anschließenden zwei Persona-Beschreibungen näher erläutert.\bigskip \\
+\emph{Natasha, 13 Jahre, Unterstützende Schülerin}\\
+Natasha ist 13 Jahre alt und ist Schülern am Gymnasium. Sie hat noch keine Ausbildung, ebenso keine Erfahrung mit Computern.\\
+Natasha ist neu zu den unterstützenden Schülern dazu gekommen und kennt sich daher nicht mit dem Vorgang von Ausleihen und Rückgaben aus. Aus diesem Grund kennt sie auch die bis zur Einführung von LibOrg eingesetzte Software nicht.\\
+Der Körper von Natasha ist noch im Wachsen, wodurch ihre Finger noch kleiner als die von Erwachsenen sind. Dies hat zur Konsequenz, dass sie einzelne Tastenkombinationen nur schwer drücken kann. Während ihrer Tätigkeit bei den unterstützenden Schülern lernt sie Computer und Verwaltungsaufgaben kennen. Wie die Gruppe unterstützende Schüler vermuten lässt, unterstützt Natasha den Kunden bei seiner Arbeit.\bigskip \\
+\emph{Elmar, 60, Kunde}\\
+Elmar ist 60 Jahre alt und der Auftraggeber der neuen Software, er hat mit der alten Software jahrelang gearbeitet und kennt sich daher gut mit dem Ausleihen und Rückgeben von Büchern aus. Nach dem Abitur hat Elmar studiert und arbeitet seitdem am Gymnasium als Lehrer und in der Dienststelle des Ministerialbeauftragten.\\
+Elmar ist erfahren mit dem Umgang von Computern und übernimmt in seiner Dienststelle die Verwaltungsaufgaben. Er ist der Hauptanwender von LibOrg. Die Software muss so konzipiert sein, dass sie von ihm leicht verstanden und angewendet werden kann. Sein Ziel mit der Anwendung ist die Unterstützung bei der Verwaltung der Bücher und eine schnellere Abarbeitung der Anfragen. Die Anwendung wird von ihm an einem festen Arbeitsrechner ausgeführt.

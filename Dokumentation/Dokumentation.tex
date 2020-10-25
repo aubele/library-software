@@ -1,0 +1,112 @@
+\title{Masterprojekt: Verwaltungssoftware}
+
+\def\bildbreite{.75\textwidth}
+
+\documentclass[10pt,a4paper,oneside,english,listof=leveldown,bibliography=totocnumbered]{scrartcl}
+
+\usepackage[utf8]{inputenc}   % InputZeichenCodierung, zur RechtschreibKontrolle 
+\usepackage[T1]{fontenc}       % [Europa]OutputZeichen, zur Silbentrennung
+\usepackage{fontspec}
+\setmainfont{Arial}
+
+% erfordert texlive-fonts-recommended
+\usepackage[german]{babel}    % SprachAnpassung, zur SilbenTrennung
+\selectlanguage{german}
+
+\usepackage[left=2.10cm, right=2.10cm, top=2.50cm, bottom=2.50cm]{geometry} % Seitenrand, die option showframe zeigt Rahmen um die einzelnen Bereiche der Seite an, damit die Abstände besser eingestellt werden können.
+
+\usepackage{afterpage}         % auf neuer Seite plazieren
+\usepackage[absolute]{textpos} % Textboxen an absolute Position setzen
+\usepackage{setspace}          % Zeilenabstand anpassen (für Deckblatt)
+
+\usepackage{graphicx}          % Bilder und Graphik
+\usepackage{color}             % Farbige Schrift
+\usepackage[dvipsnames]{xcolor}
+\usepackage{longtable}         % Mehrseitige Tabelle
+\usepackage{float}             % Positionieren der Bilder mit "H"
+
+\usepackage[right]{eurosym}   % Darstellen von EURO Zeichenbiblatex
+\usepackage[autostyle=true]{csquotes}
+
+\usepackage[colorlinks,linkcolor=black, citecolor=gray, filecolor=black, urlcolor=blue]{hyperref}
+\usepackage[style=numeric,backend=bibtex,sorting=none,natbib=true]{biblatex} 
+\usepackage{listings}
+
+\usepackage{subcaption}
+\usepackage{verbatim}
+\usepackage{tabularx}
+
+\addbibresource{literature}
+
+\include{header_footer}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.0em}
+\renewcommand{\baselinestretch}{1.00}
+
+\RedeclareSectionCommand[beforeskip=0.5em,afterskip=0.02em]{subparagraph}
+\RedeclareSectionCommand[beforeskip=1.0em,afterskip=0.02em]{paragraph}
+
+\begin{document}
+	\input{cover}
+	
+	\pagenumbering{roman}
+	\tableofcontents
+	\newpage
+	\listoffigures
+	\newpage
+	\listoftables
+	\newpage
+  
+	\pagenumbering{arabic}
+  	\input{introduction}
+	\newpage
+	\input{randbedingungen}
+  \newpage
+	\input{Kontextabgrenzung}
+	\newpage
+	\input{loesung} % requires label sec:domaenen (Domänenmodell)
+	\newpage
+	\input{bausteinsicht}
+	\newpage
+	\input{laufzeitsicht}
+	\newpage
+	\input{Verteilungssicht}
+	\newpage
+	\input{konzepte}
+	\newpage
+	\input{Entwurfsentscheidungen}
+	\newpage
+	\input{Szenarien}
+	\newpage
+	\input{Risiken}
+	\newpage
+	\input{App}
+	\newpage
+	\input{Glossar}
+	\newpage
+	
+	%\input{grundlagen}
+  %\newpage	
+	%\include{architecture_and_programflow}
+	%\newpage
+	%\input{conclusion}	
+	%\newpage
+	\section*{Literatur}
+	\addcontentsline{toc}{section}{Literatur}
+	\printbibliography[heading=none]
+	\newpage
+	
+	\section*{Anhang}
+	\addcontentsline{toc}{section}{Anhang}
+		\renewcommand{\thesection}{\Alph{section}}
+		\renewcommand{\thesubsection}{\Alph{subsection}}
+		\input{addendum}
+		\input{codedocumentation}
+		\input{installer}
+		\input{dll}
+		\input{Update}
+		\input{usability}
+		\input{Configuration}
+
+\end{document}

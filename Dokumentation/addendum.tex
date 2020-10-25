@@ -1,0 +1,69 @@
+\input{concepts_and_architecture}
+\newpage
+
+\subsection{Einrichtung TaskBoard (DH)}
+\label{Anhang_TaskBoard}
+Quellen:
+\begin{itemize}
+	\item https://taskboard.matthewross.me
+	\item www.vultr.com/docs/how-to-install-and-configure-taskboard-on-ubuntu-16-04
+	\item askubuntu.com/questions/184791/how-to-disable-non-ssl-connection-on-apache-2-2
+\end{itemize}
+Benötigte Pakete:\\
+apache2, sqlite3, libapache2-mod-php, php-sqlite3, unzip, Apache expires und rewrite 
+Module, openssl\bigskip \\
+Vorgehen:
+\begin{enumerate}
+	\item Generierung eines Zertifikats:
+	\begin{enumerate}
+		\item mkdir /etc/apache2/ssl und cd /etc/apache2/ssl
+		\item Privater Schlüssel: openssl genrsa -aes256 -out pkey.pem 2048
+		\item Zertifikat erzeugen: openssl req -new -x509 -days 356 -key pkey.pem -out cert.pem (Domänenname vergeben)
+	\end{enumerate}
+	\item TaskBoard installieren:
+	\begin{enumerate}
+		\item cd /var/www/html
+		\item wget https://github.com/kiswa/TaskBoard/archive/master.zip
+		\item mv TaskBoard-master taskboard und cd taskboard
+		\item ./build/composer.phar install (zwingend so ausführen!)
+		\item chown -R www-data:www-data /var/www/html/taskboard
+	\end{enumerate}
+	\item Apache-Konfiguration in /etc/apache2/sites-available/taskboard.conf: siehe Tabelle \ref{tab:taskboardConf}
+	\begin{table}
+		\centering
+		\caption{taskboard.conf}
+			\begin{tabular}{|l|}
+				\hline
+				%\# Weiterleitung auf https\\
+        $<$VirtualHost *:80$>$\\
+        { }{ }{ }ServerName gitlab-testbot.informatik.hs-augsburg.de\\
+        %{ }{ }{ }\# Redirect Requests to SSL\\
+        { }{ }{ }Redirect permanent / https://gitlab-testbot.informatik.hs-augsburg.de\\
+        { }{ }{ }ErrorLog \$\{APACHE\_LOG\_DIR\}/taskboard.error.log\\
+        { }{ }{ }CustomLog \$\{APACHE\_LOG\_DIR\}/taskboard.access.log combined\\
+        $<$/VirtualHost$>$\\
+        $<$IfModule mod\_ssl.c$>$\\
+        { }{ }{ }$<$VirtualHost *:443$>$\\
+        { }{ }{ }{ }{ }{ }ServerName gitlab-testbot.informatik.hs-augsburg.de\\
+        { }{ }{ }{ }{ }{ }DocumentRoot /var/www/html/taskboard\\
+        { }{ }{ }{ }{ }{ }SSLEngine on \\
+        { }{ }{ }{ }{ }{ }SSLCertificateFile /etc/apache2/ssl/cert.pem\\
+        { }{ }{ }{ }{ }{ }SSLCertficateKeyFile /etc/apache2/ssl/pkey.pem\\
+        { }{ }{ }{ }{ }{ }$<$Directory /var/www/html/taskboard$>$\\
+        { }{ }{ }{ }{ }{ }{ }{ }{ }Options $-$Indexes $+$FollowSymLinks\\
+        { }{ }{ }{ }{ }{ }{ }{ }{ }AllowOverride All \\
+        { }{ }{ }{ }{ }{ }{ }{ }{ }Require all granted \\
+        { }{ }{ }{ }{ }{ }$<$/Directory$>$ \\
+       { }{ }{ }$<$/VirtualHost$>$ \\
+       $<$/IfModule$>$\\
+				\hline
+			\end{tabular}
+		\label{tab:taskboardConf}
+	\end{table}
+	\item a2ensite taskboard.conf
+	\item a2enmod expires; a2enmod rewrite und a2enmod ssl
+	\item service apache2 restart
+\end{enumerate}
+Default-Benutzer: admin mit Passwort: admin
+\newpage
+

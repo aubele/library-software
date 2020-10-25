@@ -1,0 +1,16 @@
+\subsection{Installer (DH)}
+\label{INSTALLER_HOWTO}
+Um die Anwendung zum Kunden zu transferieren wird ein Installer-Projekt angelegt. Vor der Einrichtung des Installer-Projektes wird erläutert, welche Aufgaben ein Installer hat.\bigskip \\
+Programme benötigen oft nicht nur die exe-Datei sondern auch andere Daten. Mit Hilfe eines Installers werden diese Dateien an den richtigen Ort kopiert. Wichtige Orte für ein Programm sind unter anderem: C:\textbackslash Programme bzw. C:\textbackslash Programme (x86) für statische Dateien (beispielsweise die exe-Datei und dlls), C:\textbackslash ProgramData für Dateien, die von mehreren Programmen benutzt werden, C:\textbackslash Benutzer für benutzerspezifische Dateien (z. B. Einstellungen) und C:\textbackslash Users\textbackslash Public\textbackslash Desktop für Verknüpfungen zur Anwendung \cite[vgl.][]{Installer_1}. Neben dem Kopieren der Dateien erlaubt es ein Installer zudem verschiedene Komponenten der Software auszuwählen. Des Weiteren können verschiedene Abhängigkeiten (z. B. Speicherplatz) überprüft werden \cite[vgl.][]{Installer_2}.\bigskip \\
+Nachdem einige wichtige Aufgaben von Installer genannt worden sind, wird die Einrichtung des Installers unter Verwendung des Qt Installer-Frameworks beschrieben. Das Installer-Framework unterstützt die Auswahl eines Zielverzeichnisses für die Installation, die Auswahl von Komponenten und die Lizenzannahme \cite[vgl.][]{InstallerFramework1}. Die Lizenzdatei ist über die Online-Site app.legaltemplates.net erstellt worden.\\
+Das Installer-Projekt muss manuell angelegt werden, hierzu muss folgende Struktur angelegt werden \cite[vgl][]{InstallerFramework2}:
+\begin{itemize}
+	\item Projektordner
+	\begin{itemize}
+		\item config
+		\item packages
+	\end{itemize}
+\end{itemize}
+In den config-Ordner werden eine config.xml-Datei und die Icon-Files (einmal als .ico für die Exe und einmal als .png für die Anwendung intern) eingefügt. In der config-Datei wird das Icon eingestellt, sowie der Autor und die Version des Installers eingetragen. Im packages-Ordner werden alle Komponenten, die installierbar sind, abgelegt. Dazu wird ein Ordner für jede Komponente angelegt, welcher die Unterordner data (darin sind die Dateien enthalten, die kopiert werden müssen) und meta enthält. Die Lizenzdatei und eine package.xml-Datei sind in diesem meta-Ordner enthalten. In der package.xml wird der Komponente ein Name und eine Beschreibung zugewiesen. Ebenfalls wird die Lizenzdatei hierin eingetragen und eingestellt, dass die Komponente installiert werden muss.\\
+Nachdem die Struktur des Installers angelegt worden ist, muss die Datei deploy.bat ausgeführt werden. Dieses selbst erstellte Skript generiert einen Ornder bin und kopiert alle .dll, .exe und sonstige notwendigen Dateien aus dem Projekt in diesen Ordner. Anschließen wird der bin-Ordner gezippt und in das data-Verzeichnis der Komponente verschoben. Abschließend wird mit dem Skript createInstaller.bat der Installer erzeugt. 
+\newpage

@@ -1,0 +1,53 @@
+ALLES AUßER SCHÜLERMASKE UND INSTALLER
+
+Allgemein:
+	- Größe der Spalten
+	- Evtl ein Info-Button einfügen über  ->  Bei Beschädigung Bücher einzeln zurückgeben
+	- Klassennamen der Kurse in Combobox
+	- Sortierung bei Listen
+	
+Ausleihe/Rückgabe:
+	- Bei Kursen werden keine Schüler angezeigt
+	- Textbox für Beschädigungen ist anfangs aktiv
+	- Zahl zwei in Tabelle leicht verschoben
+	- Zeile mit doppelter Ausleihe rot hervorheben
+
+Schülerliste:
+	- Schüler mit Ausleihen können entfernt werden
+	- Rotes hervorheben bei Schülern mit Kommentar
+	- Filterung nach Klasse, mehrfach ausgeliehene gleiche Bücher und offene Rückgaben sowie 
+	offene Ferienausleihen
+	- Suche fehlerhaft bei kleines/großes ö-Ö ü-Ü ä-Ä
+
+Import:
+	- Fehleranzeige
+	- Bei falschem Dateinamen Tooltip zu unauffällig
+	- Anfänglicher Text
+	- Bei einem neuen Schuljahr werden wahrscheinlich einige Schüler überschrieben, welche noch 
+	Ausleihen besitzen und die Klassen werden nicht richtig aktualisiert -> siehe Lastenheft 5.5 Aktualisieren der Schüler
+	- Import bei offener Schülerliste, Datensynchronisation
+
+3rd Party License:
+	- Dialog Aussehen
+
+Büchermaske:
+	- Label über Lineedit
+
+Bücherliste:
+	- Buch löschen wenn Ausleihen noch offen sind?
+	- Suche auch nach Untertitel
+	- Filterung nach Klasse
+
+Benutzer wechseln:
+	- Features welche bereits offen sind, werden bei einem Benutzerwechsel nicht geschlossen -> Fehlverhalten
+
+Einstellungen:
+	- Farbdialog keine Wirkung
+
+Fehlt:
+	- Liste doppelter Ausleihe -> siehe Lastenheft 5.9
+	- Ferienausleihe -> siehe Lastenheft 5.14
+	- Benutzer hinzufügen -> siehe Lastenheft 5.7
+
+
+
